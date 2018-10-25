@@ -17,17 +17,19 @@ export default new Router({
           component: () => import('./components/contains/Listquestion.vue')
         },
         {
+          path: '/articles',
+          name: 'myarticles',
+          props: true,
+          component: () => import('./components/contains/Myquestion.vue')
+        },
+        {
           path: '/:id',
           name: 'detailquestion',
           props: true,
           component: () => import('./components/contains/Detailquestion.vue')
-        }
+        },
+
       ] 
-    },
-    {
-      path: '/myarticles',
-      name: 'detailarticles',
-      component: () => import('./components/contains/Myquestion.vue')
     }
   ]
 })

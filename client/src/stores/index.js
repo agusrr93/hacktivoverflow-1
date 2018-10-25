@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-const url = 'http://localhost:3000'
+const url = 'https://hacktivover.agusrr.xyz'
 
 Vue.use(Vuex)
 
@@ -66,7 +66,7 @@ export default new Vuex.Store({
     },
     getQuestion ({ commit }, payload) {
       axios({
-        url: `http://localhost:3000/questions/${payload}`,
+        url: `${url}/questions/${payload}`,
         method: 'get'
       })
         .then(found => {

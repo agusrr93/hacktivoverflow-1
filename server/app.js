@@ -1,3 +1,5 @@
+const sendArticle=require('./helpers/cronjob.helper').sendarticle
+
 require('dotenv').config()
 const express   = require('express')
 const logger    = require('morgan')
@@ -27,6 +29,7 @@ app.use(express.urlencoded({ extended: false }))
 const indexRouter = require('./routes/index')
 
 app.use('/', indexRouter)
-app.listen(port, () => console.log(`Listening on port ${port} and db ${database}`))
+app.listen(port, () => sendArticle('hello'))
+// console.log(`Listening on port ${port} and db ${database}`))
 
 module.exports = app

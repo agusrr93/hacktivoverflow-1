@@ -13,7 +13,7 @@
           <router-link class="nav-link" to="/list">Dashboard <span class="sr-only">(current)</span></router-link>
         </li>
         <li class="nav-item active">
-          <router-link class="nav-link" to="/myarticles">My Question<span class="sr-only">(current)</span></router-link>
+          <router-link class="nav-link" to=/articles>My Question<span class="sr-only">(current)</span></router-link>
         </li>
       </ul>
       <div class="form-inline my-2 my-lg-0">
@@ -69,7 +69,7 @@
       <div class="modal fade" id="modalUserSignIn" tabindex="-1" role="dialog" aria-labelledby="modalUserSignInLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
-            <div class="g-signin2" data-onsuccess="onSignIn"></div>
+            <div class="g-signin2" data-onsuccess="onSignIn" data-dismiss="modal"></div>
             <div class="modal-header  bg-primary text-white">
               <h5 class="modal-title" id="modalUserSignInLabel"> Hallo, {{user.name}} </h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -126,7 +126,7 @@ export default {
     onSuccess(googleUser) {
 
       axios({
-        url:'http://localhost:3000/users/glogin',
+        url:'https://hacktivover.agusrr.xyz/users/glogin',
         method:'POST',
         data:{
           token:googleUser.Zi.id_token
@@ -136,6 +136,7 @@ export default {
            
             localStorage.setItem('token',response.data.token)
             this.loginGoogle()
+
         })
         .catch((err)=>{
             console.log(err)

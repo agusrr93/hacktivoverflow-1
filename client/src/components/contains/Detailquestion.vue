@@ -4,9 +4,12 @@
       <div class="bg-success text-white">
         <h4 class="pl-2 pr-2">{{question.title}}</h4>
       </div>
+  
       <div class="card-body">
-        <button class="btn btn-sm btn-outline-success" v-if="user._id !== question.owner._id" @click="up(question._id)">{{question.vote.length}} <i class="fas fa-arrow-up"></i> </button>
-        <button class="btn btn-sm btn-outline-warning ml-1" v-if="user._id !== question.owner._id" @click="down(question._id)">{{question.unvote.length}}<i class="fas fa-arrow-down"></i> </button>
+        <button class="btn btn-sm btn-outline-success" v-if="(user._id !== question.owner._id)&&(question.vote.indexOf(user._id)==-1)" @click="up(question._id)">{{question.vote.length}} <i class="fas fa-arrow-up"></i> </button>
+        <button class="btn btn-sm btn-outline-secondary" v-if="(user._id !== question.owner._id)&&(question.vote.indexOf(user._id)!=-1)">{{question.vote.length}} <i class="fas fa-arrow-up"></i> </button>
+        <button class="btn btn-sm btn-outline-warning ml-1" v-if="(user._id !== question.owner._id)&&(question.unvote.indexOf(user._id)==-1)" @click="down(question._id)">{{question.unvote.length}}<i class="fas fa-arrow-down"></i> </button>
+        <button class="btn btn-sm btn-outline-secondary ml-1" v-if="(user._id !== question.owner._id)&&(question.unvote.indexOf(user._id)!=-1)">{{question.unvote.length}}<i class="fas fa-arrow-down"></i> </button>
         <button class="btn btn-sm btn-outline-success">Total vote : {{question.vote.length-question.unvote.length}}</button>
         <button class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#modalEditquestion" v-if="user._id == question.owner._id" @click="editData(question)">Edit</button>
         <button @click="deleteMyquestion(question._id)" class="btn btn-sm btn-outline-danger ml-1" v-if="user._id == question.owner._id">Delete</button>
@@ -22,9 +25,11 @@
             <div class="card mb-3" v-for="com in question.answers" :key="com._id">
               <strong>{{com.owner.name}} said: </strong>
               <blockquote v-html="com.answer" class="mb-3"></blockquote>
-              
-              <button class="btn btn-sm btn-outline-success" v-if="user._id !== com.owner._id" @click="upp(com._id)">{{com.vote.length}} <i class="fas fa-arrow-up"></i> </button>
-              <button class="btn btn-sm btn-outline-warning ml-1" v-if="user._id !== com.owner._id" @click="downn(com._id)">{{com.unvote.length}}<i class="fas fa-arrow-down"></i> </button>
+             
+              <button class="btn btn-sm btn-outline-secondary" v-if="(user._id !== com.owner._id)&&(com.vote.indexOf(user._id)!=-1)">{{com.vote.length}} <i class="fas fa-arrow-up"></i> </button>
+              <button class="btn btn-sm btn-outline-success" v-if="(user._id !== com.owner._id)&&(com.vote.indexOf(user._id)==-1)" @click="upp(com._id)">{{com.vote.length}} <i class="fas fa-arrow-up"></i> </button>
+              <button class="btn btn-sm btn-outline-warning ml-1" v-if="(user._id !== com.owner._id)&&(com.unvote.indexOf(user._id)==-1)" @click="downn(com._id)">{{com.unvote.length}}<i class="fas fa-arrow-down"></i> </button>
+              <button class="btn btn-sm btn-outline-secondary ml-1" v-if="(user._id !== com.owner._id)&&(com.unvote.indexOf(user._id)!=-1)">{{com.unvote.length}}<i class="fas fa-arrow-down"></i> </button>
               <button class="btn btn-sm btn-outline-success">Total vote : {{com.vote.length-com.unvote.length}}</button>
               <a href="#" class="text-success" data-toggle="modal" data-target="#modalEditanswer" v-if="user._id == com.owner._id" @click="editAnswer(com)">Edit</a>
               <a href="#" class="text-danger" v-if="user._id == com.owner._id" @click="deleteAnswer(com._id)">Delete</a>
@@ -92,7 +97,7 @@
 <script>
 import axios from 'axios'
 import { mapState, mapActions } from 'vuex'
-const url = 'http://localhost:3000'
+const url = 'https://hacktivover.agusrr.xyz'
 export default {
   props: ['id'],
   name: 'listquestion',

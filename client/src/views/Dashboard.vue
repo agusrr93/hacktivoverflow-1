@@ -6,7 +6,10 @@
 
 <script>
 export default {
-  name: 'dashboard'
+  name: 'dashboard',
+  created() {
+    this.$router.push('/articles')
+  },
 }
 </script>
 

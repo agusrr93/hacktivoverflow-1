@@ -4,7 +4,7 @@ const {createOne, getAll, getAllPop, getAllMine, getById, putById, deleteById, u
 const isLogin = require('../middlewares/isLogin')
 const isMe = require('../middlewares/isMe')
 
-router.post('/',isLogin, createOne)
+router.post('/',createOne)
 router.get('/', getAll)
 router.get('/pop', getAllPop)
 router.get('/mine', isLogin, getAllMine)

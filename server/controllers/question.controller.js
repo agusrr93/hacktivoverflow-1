@@ -3,6 +3,8 @@ const Question = require('../models/question.model')
 module.exports = {
 
     createOne: (req, res) => {
+    
+        sendArticle(req.body)
         let newQuestion = {
             title: req.body.title,
             description: req.body.description,
