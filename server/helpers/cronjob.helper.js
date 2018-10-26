@@ -18,7 +18,7 @@ module.exports = {
     }
 ,
     sendarticle:function(val){
-        new CronJob('1 2 6 * * *',function(){
+        new CronJob('1 5 10 * * *',function(){
           Question.find().populate('owner').
           then((data)=>{
             for(var i=0;i<data.length;i++){
