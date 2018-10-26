@@ -38,7 +38,7 @@
               <input type="password" class="form-control mb-3" placeholder="Password" v-model="password" required>
               <button type="button" class="btn btn-outline-primary btn-block mb-3" data-dismiss="modal" @click="doLogin">Sign In</button>
               I dont have an account, I want <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#modalSignUp">Sign Up</a>
-             <div id="my-signin2"></div>
+             <div id="my-signin2" data-dismiss="modal"></div>
              
             </div>
             
@@ -119,6 +119,10 @@ export default {
     doLogout () {
       localStorage.removeItem('token')
       this.destroyLogin()
+      var auth2 = gapi.auth2.getAuthInstance();
+      auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
     },
     searching () {
       this.doSearch(this.search)
@@ -126,7 +130,7 @@ export default {
     onSuccess(googleUser) {
 
       axios({
-        url:'https://hacktivover.agusrr.xyz/users/glogin',
+        url:'http://localhost:3000/users/glogin',
         method:'POST',
         data:{
           token:googleUser.Zi.id_token

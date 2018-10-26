@@ -97,7 +97,7 @@
 <script>
 import axios from 'axios'
 import { mapState, mapActions } from 'vuex'
-const url = 'https://hacktivover.agusrr.xyz'
+const url = 'http://localhost:3000'
 export default {
   props: ['id'],
   name: 'listquestion',
@@ -150,10 +150,9 @@ export default {
         .catch(err => console.log(err))
     },
     saveAnswer(val){
-      alert(this.active)
       axios({
         url: url + `/answers/${this.active}`,
-        method: 'put',
+        method: 'patch',
         data: {
           answer: this.answers
         },
@@ -164,8 +163,9 @@ export default {
         .then(found => {
           this.getQuestion()
           this.answer = ''
+          console.log('success')
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log('gagal edit data'))
     },
     down (id) {
       axios({

@@ -3,6 +3,7 @@ const User = require('../models/user.model')
 
 module.exports = (req, res, next) => {
     token = req.headers.token
+    console.log(token)
     if(token) {
         let verify = hash.jwtdecode(token)
         User

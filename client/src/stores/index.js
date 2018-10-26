@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-const url = 'https://hacktivover.agusrr.xyz'
+const url = 'http://localhost:3000'
 
 Vue.use(Vuex)
 

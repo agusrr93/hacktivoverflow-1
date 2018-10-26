@@ -18,13 +18,14 @@ module.exports = {
     }
 ,
     sendarticle:function(val){
-        new CronJob('* 5 10 * * *',function(){
+        new CronJob('1 2 6 * * *',function(){
           Question.find().populate('owner').
           then((data)=>{
             for(var i=0;i<data.length;i++){
               console.log(data[i].vote.length)
               if(data[i].vote.length==3)
               {
+                console.log(data[i].owner.email)
                 sgMail.setApiKey('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')
                 const msg = {
                     to: data[i].owner.email,

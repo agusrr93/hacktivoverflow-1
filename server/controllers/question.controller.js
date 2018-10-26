@@ -3,8 +3,7 @@ const Question = require('../models/question.model')
 module.exports = {
 
     createOne: (req, res) => {
-    
-        sendArticle(req.body)
+        console.log('masuk ke', req.decoded)
         let newQuestion = {
             title: req.body.title,
             description: req.body.description,
@@ -101,14 +100,9 @@ module.exports = {
     },
 
     deleteById: (req, res) => {
-        Question.findById({_id:req.params.id, owner: req.decoded._id})
-        .then(result => {
-            let Question = new Question({_id: result._id})
-            Question.remove()
-            .then( response => res.status(200).json(response))
-            .catch( err => res.status(500).json(err))
-        })
-        .catch( err => res.status(500).json(err))
+        Question.remove({_id:req.params.id})
+         .then( response => res.status(200).json(response))
+         .catch( err => res.status(500).json(err))
     },
 
     upvote: (req, res) => {
